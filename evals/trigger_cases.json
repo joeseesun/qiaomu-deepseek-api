@@ -1,0 +1,33 @@
+{
+  "recommended_threshold": 0.5,
+  "description_required_concepts": ["provider", "processing"],
+  "positive_concepts": {
+    "provider": ["DeepSeek", "深度求索", "qiaomu-deepseek-api"],
+    "processing": ["搜索", "读链接", "以图搜图", "解析文件", "识字", "音频转文字", "文字转语音", "审核", "OCR", "ASR", "TTS", "Fetch", "search", "document", "transcription"]
+  },
+  "should_trigger": [
+    "用 DeepSeek 搜索最新的官方发布",
+    "用 DeepSeek 以图搜图找原始出处",
+    "用深度求索读链接并总结",
+    "用 DeepSeek 解析文件里的表格",
+    "DeepSeek OCR 识别发票",
+    "用 DeepSeek 的 ASR 音频转文字",
+    "用 DeepSeek TTS 配一段普通话",
+    "用 DeepSeek 测试内容审核",
+    "Use qiaomu-deepseek-api for document Q&A",
+    "Call DeepSeek Fetch for the public page"
+  ],
+  "should_not_trigger": [
+    "查一下今天的天气",
+    "用本地工具 OCR 这个文件",
+    "DeepSeek 会员怎么退款",
+    "给 SiliconFlow 配置第三方网关",
+    "把这段音频转文字",
+    "帮我读链接，优先离线"
+  ],
+  "near_neighbor": [
+    "DeepSeek API 调用余额在哪里看",
+    "给 OpenAI TTS 写一个示例",
+    "用 qiaomu-ds-search 做交叉核实"
+  ]
+}

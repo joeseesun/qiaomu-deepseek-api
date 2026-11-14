@@ -1,0 +1,44 @@
+{
+  "name": "qiaomu-deepseek-api",
+  "version": "1.0.0",
+  "owner": "Qiaomu",
+  "updated_at": "2026-11-13",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "production",
+  "context_budget_tier": "production",
+  "review_cadence": "on API changes or quarterly",
+  "target_platforms": [
+    "openai",
+    "claude",
+    "agent-skills-compatible",
+    "generic"
+  ],
+  "release_gates": [
+    "package_validation",
+    "trigger_eval",
+    "secret_scan",
+    "runtime_smoke",
+    "clean_install"
+  ],
+  "intent": {
+    "job_to_be_done": "用自己的 DeepSeek 官方 Key 一次性处理网页、文档、图像和语音",
+    "target_users": [
+      "使用 Agent Skills 或 Python CLI 的 DeepSeek API 用户"
+    ],
+    "inputs": [
+      "公开 URL 或查询",
+      "用户指定的文档、图片或音频",
+      "用户提供的文字"
+    ],
+    "outputs": [
+      "来源、网页 Markdown、逐页 OCR、转写或模型答案",
+      "本地 WAV 及结构化 JSON"
+    ],
+    "exclusions": [
+      "第三方网关",
+      "离线处理",
+      "模型通用评测和多轮对话历史"
+    ]
+  }
+}

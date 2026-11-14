@@ -1,0 +1,114 @@
+{
+  "evidence_kind": "provider_backed",
+  "date": "2026-11-13",
+  "ok": true,
+  "scope": "本包 CLI 的真实 API 检查；通过条件基于命令、工具结果和目标字段。没有保存密钥、私人文件和完整响应。",
+  "cases": [
+    {
+      "name": "search",
+      "passed": true,
+      "sample": {}
+    },
+    {
+      "name": "fetch",
+      "passed": true,
+      "sample": {
+        "title": "DeepSeek 发布全家桶应用 API | DeepSeek API Docs"
+      }
+    },
+    {
+      "name": "ocr",
+      "passed": true,
+      "sample": {
+        "page_count": 1
+      }
+    },
+    {
+      "name": "tts",
+      "passed": true,
+      "sample": {
+        "duration_seconds": 3.16
+      }
+    },
+    {
+      "name": "ask-file",
+      "passed": true,
+      "sample": {
+        "title": null,
+        "answer": "CEDAR-63842",
+        "cleanup": {
+          "deleted": true
+        }
+      }
+    },
+    {
+      "name": "chat-search",
+      "passed": true,
+      "sample": {
+        "title": null,
+        "answer": "官方文章标题为 **《DeepSeek 发布全家桶应用 API》**，发布于 DeepSeek API Docs 官方文档站。\n\n**引用信息：**\n- 标题：DeepSeek 发布全家桶应用 API\n- 来源：DeepSeek API Docs\n- 发布时间：2026-11-12\n- 链接：https://api-docs.deepseek.com/zh-cn/news/news261113/ \n\n该文章详细介绍了联网搜索、深度思考搜索、文件输入、阅读链接、模型安全以及 OCR、ASR、TTS 等能力的开放情况，并附有工具 API 定价说明。DeepSeek 官方更新日志中也同步记录了这次发布。"
+      },
+      "limitation": "真实触发搜索且附引用；模型额外输出的 2026-11-12 与官方中文公告标注的 2026-11-13 不一致。该用例通过标准为工具与引用存在，不验证所有附带陈述。"
+    },
+    {
+      "name": "chat-deep",
+      "passed": true,
+      "sample": {
+        "title": null,
+        "answer": "DeepSeek ASR 文档显示，**单次请求音频最长支持 120 秒**（且文件大小不超过 8 MiB）。  \nDeepSeek TTS 文档规定，**单次请求/会话文本最多 10,000 个计费字符**（请求体不超过 64 KiB）。"
+      }
+    },
+    {
+      "name": "chat-read",
+      "passed": true,
+      "sample": {
+        "title": null,
+        "answer": "根据页面内容，V4.1-Flash 模型（deepseek-flash）支持的三个对话 API 接口是：\n\n1. **Messages**\n2. **Responses**\n3. **Chat Completions**"
+      }
+    },
+    {
+      "name": "safety-title",
+      "passed": true,
+      "sample": {
+        "title": "番茄炒蛋顺序",
+        "answer": "先炒鸡蛋盛出，再炒番茄出汁后倒回鸡蛋一起翻炒调味。"
+      }
+    },
+    {
+      "name": "asr",
+      "passed": true,
+      "sample": {
+        "text": "你好，这是DeepSeek语音接口测试。"
+      }
+    },
+    {
+      "name": "image-search",
+      "passed": true,
+      "sample": {
+        "title": null,
+        "answer": "识别为 NASA《蓝色弹珠》，编号 AS17-148-22727。"
+      }
+    },
+    {
+      "name": "tts-stella",
+      "passed": true,
+      "sample": {
+        "duration_seconds": 3.96
+      }
+    },
+    {
+      "name": "tts-tide",
+      "passed": true,
+      "sample": {
+        "duration_seconds": 4.28
+      }
+    },
+    {
+      "name": "verify-key",
+      "passed": true,
+      "sample": {
+        "flash_listed": true
+      }
+    }
+  ]
+}
