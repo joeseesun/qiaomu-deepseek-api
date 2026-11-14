@@ -1,0 +1,259 @@
+{
+  "ok": true,
+  "threshold": 0.5,
+  "description_concepts": [
+    "processing",
+    "provider"
+  ],
+  "missing_description_concepts": [],
+  "summary": {
+    "total": 19,
+    "passed": 19,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "用 DeepSeek 搜索最新的官方发布",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用 DeepSeek 以图搜图找原始出处",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用深度求索读链接并总结",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用 DeepSeek 解析文件里的表格",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "DeepSeek OCR 识别发票",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用 DeepSeek 的 ASR 音频转文字",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用 DeepSeek TTS 配一段普通话",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用 DeepSeek 测试内容审核",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Use qiaomu-deepseek-api for document Q&A",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "Call DeepSeek Fetch for the public page",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "processing",
+          "provider"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "查一下今天的天气",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用本地工具 OCR 这个文件",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "processing"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "DeepSeek 会员怎么退款",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "给 SiliconFlow 配置第三方网关",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "把这段音频转文字",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "processing"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "帮我读链接，优先离线",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "processing"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "DeepSeek API 调用余额在哪里看",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "provider"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "给 OpenAI TTS 写一个示例",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "processing"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "用 qiaomu-ds-search 做交叉核实",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "processing"
+        ],
+        "negative_pattern": null
+      }
+    ]
+  }
+}
