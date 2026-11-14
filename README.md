@@ -20,7 +20,9 @@ npx skills add joeseesun/qiaomu-deepseek-api
 
 - [ ] 使用支持 Agent Skills 的工具，安装命令需要 Node.js/npm。
 - [ ] 运行命令需要 Python 3.10 或更新版本，无需安装 Python 包。
-- [ ] 在 [DeepSeek 开放平台](https://platform.deepseek.com/api_keys) 获取自己的 API Key，通过宿主的密钥配置注入 `DEEPSEEK_API_KEY`。也可以在自己的终端进入 Skill 目录运行 `python3 scripts/deepseek_api.py setup`，隐藏输入后保存到本机专用配置文件。不要将 Key 发到聊天。
+- [ ] 在 [DeepSeek 开放平台](https://platform.deepseek.com/api_keys) 获取自己的 API Key，通过宿主的密钥配置注入 `DEEPSEEK_API_KEY`。也可以在自己的终端进入 Skill 目录运行 `python3 scripts/deepseek_api.py setup`，隐藏输入并验证后保存到本机专用配置文件。首次执行发现未配置时，Agent 会给出官方申请入口和配置命令，再继续原任务。不要将 Key 发到聊天。
+
+TTS 会在你没指定音色时提供单选卡，在不支持卡片的宿主里用文字选项。两款音色使用同一句话实测，可下载试听：[海星 Stella 女声](assets/voices/stella.mp3) · [暗潮 Tide 男声](assets/voices/tide.mp3)。
 
 ## 用法
 
@@ -44,7 +46,7 @@ npx skills add joeseesun/qiaomu-deepseek-api
 ```bash
 python3 scripts/deepseek_api.py search 'DeepSeek API site:api-docs.deepseek.com' --count 3
 python3 scripts/deepseek_api.py ask-file report.pdf --prompt '列出三项关键数字'
-python3 scripts/deepseek_api.py tts --text '你好，欢迎收听。' --output demo.wav
+python3 scripts/deepseek_api.py tts --text '你好，欢迎收听。' --voice stella --output demo.wav
 ```
 
 [完整命令与输出约定](references/commands.md) · [验证与限制](reports/creation-handoff.md)

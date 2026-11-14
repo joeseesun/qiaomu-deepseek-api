@@ -4,7 +4,7 @@
 
 | 目的 | Python 入口的参数 | 主要返回值 |
 |---|---|---|
-| 检查配置 | `status` / `setup` | `configured`；仅检查或保存密钥，`verified` 为 false |
+| 检查配置 | `status` / `setup` / `verify-key` | `status` 只检查本地；后两者通过官方模型目录验证 Key |
 | 找来源 | `search 'DeepSeek site:api-docs.deepseek.com' --count 5` | `results`（URL、标题、摘要及日期）、`empty`；加 `--content` 请求站点正文 |
 | 提取网页 | `fetch https://api-docs.deepseek.com/guides/ocr/` | `title`、`content`（Markdown） |
 | 对话联网 | `chat --web search --prompt '查官方公告并给出链接'` | `answer`、`tool_calls`、`tool_results`、`citations` |
@@ -16,6 +16,7 @@
 | 文档问答 | `ask-file report.pdf --prompt '文件里的总金额是多少？'` | `answer`、`purpose`、`cleanup.deleted` |
 | 图文问答 | `ask-file report.pdf --purpose rich_layout_recognition --prompt '解释图 1'` | 按文档排版提供模型能识别及裁出的图和文字 |
 | 转写 | `asr recording.wav` | `text`、`duration_ms`、`empty` |
+| 列音色 | `voices` | 离线返回 `stella`、`tide` |
 | 配音 | `tts --text-file script.txt --voice stella --output narration.wav` | WAV 路径、格式与秒数；也可用 `--text`；`tide` 为男声 |
 | 审核、标题、元信息 | `chat --safety --title --reminder '2026-11-13,星期五,北京,Web,中文' --prompt '给我三个秋季散步建议'` | 结束原因、标题、用量；元信息仅填用户提供的值 |
 

@@ -88,6 +88,27 @@
         "title": null,
         "answer": "识别为 NASA《蓝色弹珠》，编号 AS17-148-22727。"
       }
+    },
+    {
+      "name": "tts-stella",
+      "passed": true,
+      "sample": {
+        "duration_seconds": 3.96
+      }
+    },
+    {
+      "name": "tts-tide",
+      "passed": true,
+      "sample": {
+        "duration_seconds": 4.28
+      }
+    },
+    {
+      "name": "verify-key",
+      "passed": true,
+      "sample": {
+        "flash_listed": true
+      }
     }
   ]
 }

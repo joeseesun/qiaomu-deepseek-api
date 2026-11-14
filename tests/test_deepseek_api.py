@@ -41,7 +41,7 @@ class Boundaries(unittest.TestCase):
     def test_tts_does_not_replace_existing_wav(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "speech.wav"
-            args = api.cli_parser().parse_args(["tts", "--text", "sample", "--output", str(path)])
+            args = api.cli_parser().parse_args(["tts", "--text", "sample", "--output", str(path), "--voice", "stella"])
             client = SimpleNamespace(request=lambda *a, **k: b"\x00\x02" * 1200)
             api.tts(client, args)
             with wave.open(str(path)) as audio:

@@ -22,6 +22,11 @@ from pathlib import Path
 
 ORIGIN = "https://api.deepseek.com"
 MODEL = "deepseek-flash"
+KEYS_URL = "https://platform.deepseek.com/api_keys"
+VOICES = (
+    {"id": "stella", "label": "海星 / Stella", "description": "女声 / Female", "default": True},
+    {"id": "tide", "label": "暗潮 / Tide", "description": "男声 / Male", "default": False},
+)
 MIB = 1024 * 1024
 JSON_LIMIT = 32 * MIB
 AUDIO_LIMIT = 24_000 * 2 * 60 * 30
@@ -78,18 +83,20 @@ def load_key():
                 raise APIError("Credential file must be a regular file with permissions 600.", "unsafe_config")
             return validate_key(json.load(file)["api_key"])
     except FileNotFoundError:
-        raise APIError("Inject DEEPSEEK_API_KEY or run setup in your own terminal.", "missing_key") from None
+        raise APIError("Inject DEEPSEEK_API_KEY or run setup in your own terminal.", "missing_key", key_url=KEYS_URL) from None
     except (ValueError, KeyError, TypeError):
         raise APIError("Credential file is invalid. Run setup again.", "invalid_config") from None
 
 
 def setup(_args):
-    if not sys.stdin.isatty():
-        raise APIError("Run setup in your own interactive terminal.", "terminal_required")
+    if not (sys.stdin.isatty() and sys.stderr.isatty()):
+        raise APIError("Run setup in your own interactive terminal.", "terminal_required", key_url=KEYS_URL)
     path = config_path()
     if path.is_symlink() or path.parent.is_symlink():
         raise APIError("The credential file and its directory must not be symlinks.", "unsafe_config")
+    print(f"Create an official API key at {KEYS_URL}", file=sys.stderr)
     key = validate_key(getpass.getpass("DeepSeek API key (hidden): "))
+    verified = verify_key(Client(key, timeout=30))
     path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
     fd, temp = tempfile.mkstemp(dir=path.parent)
     try:
@@ -98,7 +105,18 @@ def setup(_args):
         os.replace(temp, path)
     finally:
         Path(temp).unlink(missing_ok=True)
-    return {"configured": True, "verified": False, "path": str(path)}
+    if os.getenv("DEEPSEEK_API_KEY", "").strip():
+        print("The environment key takes precedence. Update it in your host if needed.", file=sys.stderr)
+    return {"configured": True, **verified, "path": str(path)}
+
+
+def verify_key(client, _args=None):
+    result = client.request("/models", method="GET")
+    models = result.get("data")
+    if not isinstance(models, list):
+        raise APIError("Model catalog response has no data array.", "bad_response")
+    return {"verified": True, "model_count": len(models),
+            "flash_listed": any(isinstance(item, dict) and item.get("id") == MODEL for item in models)}
 
 
 def provider_error(status, raw=None):
@@ -184,7 +202,7 @@ def public_url(value):
         host = (url.hostname or "").rstrip(".")
         port = url.port
         if (len(value) > 8192 or url.scheme not in ("http", "https") or
-                url.username is not None or not host or not port and url.netloc.endswith(":") or
+                url.username is not None or not host or (port is None and url.netloc.endswith(":")) or
                 re.search(r"[\s\x00-\x1f\x7f\\]", value)):
             raise ValueError
         try:
@@ -421,6 +439,9 @@ def cli_parser():
     sub = parser.add_subparsers(dest="command", required=True)
     status = sub.add_parser("status", help="Check whether a key is configured without calling DeepSeek")
     status.set_defaults(action=lambda _: {"configured": bool(load_key()), "verified": False})
+    sub.add_parser("verify-key", help="Verify credentials with the official model catalog").set_defaults(action=verify_key)
+    sub.add_parser("voices", help="List official voice options without a key").set_defaults(
+        action=lambda _: {"voices": VOICES})
     sub.add_parser("setup", help="Set a key from hidden input in your own terminal").set_defaults(action=setup)
     command = sub.add_parser("search", help="Return raw web results")
     command.add_argument("query")
@@ -442,7 +463,7 @@ def cli_parser():
     source.add_argument("--text")
     source.add_argument("--text-file", type=Path)
     command.add_argument("--output", type=Path, required=True)
-    command.add_argument("--voice", choices=("stella", "tide"), default="stella")
+    command.add_argument("--voice", choices=tuple(voice["id"] for voice in VOICES), required=True)
     command.add_argument("--keep-markdown", action="store_true")
     command.set_defaults(action=tts)
     command = sub.add_parser("chat", help="Ask Flash, optionally with built-in web tools or an image")
@@ -463,7 +484,7 @@ def main():
     args = cli_parser().parse_args()
     key = None
     try:
-        if args.command in ("setup", "status"):
+        if args.command in ("setup", "status", "voices"):
             result = args.action(args)
         else:
             if not 1 <= args.timeout <= 600:
